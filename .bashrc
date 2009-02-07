@@ -120,4 +120,3 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias 10top="cat ~/.bash_history | sed -e 's/  *$//' | sort | uniq -cd | sort -nr | head"
 # show sizes of subfolders and files in the current folder
 alias d="du -sh *"
-
