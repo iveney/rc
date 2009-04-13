@@ -24,7 +24,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-xterm-color|xterm|screen)
+xterm-color|xterm|screen|rxvt)
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     ;;
 *)
@@ -120,3 +120,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 alias 10top="cat ~/.bash_history | sed -e 's/  *$//' | sort | uniq -cd | sort -nr | head"
 # show sizes of subfolders and files in the current folder
 alias d="du -sh *"
+
+# use bxviewer
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/share/bxviewer
+export PATH=$PATH:/usr/local/share/bxviewer
