@@ -56,16 +56,34 @@ esac
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     eval "`dircolors -b`"
-    alias ls='ls --color=auto'
+    alias ls='ls --color=auto --group-directories-first -X'
     #alias dir='ls --color=auto --format=vertical'
     #alias vdir='ls --color=auto --format=long'
 fi
 
 # some more ls aliases
-alias ll='ls -hl'
+alias ll='ls -hlh'
 alias la='ls -Ah'
 #alias l='ls -CF'
 alias ..='cd ..'
+alias df='df -h'
+
+#mount cse unix machine
+alias gwcse="sshfs zgxiao@gw.cse.cuhk.edu.hk:/uac/gds/zgxiao /home/iveney/workspace/gwcse/"
+
+# cuhk cse vpn commands
+alias csekrdc="krdc rdp:/zgxiao@cse-pc -f -h"
+alias csevpnon="sudo openvpn --config /etc/openvpn/CSE-SSL-VPN.conf"
+alias csevpn="csevpnon && sleep 2 && csekrdc"
+alias csevpnoff="sudo killall openvpn"
+
+# list 10 top frequently used commands 
+alias 10top="cat ~/.bash_history | sed -e 's/  *$//' | sort | uniq -cd | sort -nr | head"
+# show sizes of subfolders and files in the current folder
+alias d="du -sh *"
+
+# set default clipboard for xclip
+alias xclip="xclip -sel clip"
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -74,35 +92,27 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
-alias df='df -h'
-alias vi=vim
+# useful bash script cdargs
+source /usr/share/doc/cdargs/examples/cdargs-bash.sh
+
+###################################################################
+# environmental variables defition
+# Added by iveney
 VISUAL=vim
 EDITOR=vim
 export VISUAL EDITOR
 
+# for input method
 export XMODIFIERS="@im=fcitx"
 #export XMODIFIERS="@im=scim"
-
-# set default clipboard for xclip
-alias xclip="xclip -sel clip"
 
 # texslide style files path
 export TEXINPUTS=:/home/iveney/.texmf-var/tex/latex/texslides:$TEXINPUTS
 
-source /usr/share/doc/cdargs/examples/cdargs-bash.sh
-
-#mount cse unix machine
-alias gwcse="sshfs zgxiao@gw.cse.cuhk.edu.hk:/uac/gds/zgxiao /home/iveney/workspace/gwcse/"
-# cuhk cse vpn commands
-alias csekrdc="krdc rdp:/zgxiao@cse-pc -f -h"
-alias csevpnon="sudo openvpn --config /etc/openvpn/CSE-SSL-VPN.conf"
-alias csevpn="csevpnon && sleep 2 && csekrdc"
-alias csevpnoff="sudo killall openvpn"
-
 # set the PAGER to most, replace default `man'
 #export PAGER=most
 
-#less语法高亮。需要安装 source-highlight
+#less highlight, need source-highlight
 PAGER='less -X -M'
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
@@ -116,11 +126,9 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# list 10 top frequently used commands 
-alias 10top="cat ~/.bash_history | sed -e 's/  *$//' | sort | uniq -cd | sort -nr | head"
-# show sizes of subfolders and files in the current folder
-alias d="du -sh *"
-
-# use bxviewer
+# use bxviewer(for pdg file)
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/share/bxviewer
 export PATH=$PATH:/usr/local/share/bxviewer
+
+#export VIM=/usr/local/share/vim/vim72
+#export VIMRUNTIME=/usr/local/share/vim/vim72
